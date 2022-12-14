@@ -16,3 +16,11 @@ th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+.footer_area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.input_area {
+  width: 50%;
+}

@@ -7,7 +7,7 @@ const mysql = require("mysql2");
 
 const db = mysql.createPool({
   host: "localhost",
-  user: "root",
+  user: "sat",
   password: "s12345",
   database: "sql_project",
 });
@@ -15,21 +15,40 @@ const db = mysql.createPool({
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// GET Data in mysql DBMS 
+
 app.get("/api/get",(req,res)=>{
   const sqlGet = "SELECT * FROM contact"
-  db.query(sqlGet,(err,result)=>{
-    res.send(result)
+  db.query(sqlGet,(err,res)=>{
+    res.send(res)
   })
 })
+
+// INSERT Data in mysql DBMS 
+
+app.get("/api/post",(req,res)=>{
+  const {name,email,contact} = req.body;
+  const sqlInsert = "INSERT INTO `contact`(`name`, `email`, `contact`) VALUES (?,?,?)"
+  db.query(sqlInsert,[name,email,contact],(err,res)=>{
+    if(err){
+      console.log(err);
+    }else{
+      res.send("Data is Insert")
+    }
+  });
+})
+
+
+
+
 app.get("/", (req, res) => {
-  // const sqlinsert =
-  //   "INSERT INTO `contact`(`name`, `email`, `contact`) VALUES ('gisan','Satayjit@gmaul.com','jamalpur')";
-  // db.query(sqlinsert, (err, result) => {
-  //   console.log("error",err);
-  //   console.log("result",result);
     res.send("Running Server");
-  // });
-});
+  });
+
+
+
+
 app.listen(port, () => {
   console.log("Server is Running");
   console.log(`Example app listening at http://localhost:${port}`);
