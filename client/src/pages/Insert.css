@@ -2,7 +2,13 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
+}
+
+.table_area {
   margin-top: 150px;
+  max-height: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 td,
@@ -23,4 +29,13 @@ tr:nth-child(even) {
 }
 .input_area {
   width: 50%;
+}
+.input_area h4 {
+  text-decoration: underline;
+}
+.sql_area {
+  background-color: rgb(72, 72, 72);
+  color: #fff;
+  padding: 5px 15px 15px 15px;
+  min-height: 60px;
 }

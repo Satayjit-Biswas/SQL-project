@@ -20,21 +20,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/api/get",(req,res)=>{
   const sqlGet = "SELECT * FROM contact"
-  db.query(sqlGet,(err,res)=>{
-    res.send(res)
-  })
-})
+  db.query(sqlGet,(err,result)=>{
+    res.send(result);
+  });
+});
 
 // INSERT Data in mysql DBMS 
 
-app.get("/api/post",(req,res)=>{
-  const {name,email,contact} = req.body;
-  const sqlInsert = "INSERT INTO `contact`(`name`, `email`, `contact`) VALUES (?,?,?)"
-  db.query(sqlInsert,[name,email,contact],(err,res)=>{
+app.post("/api/post",(req,res)=>{
+  const {name,email,address} = req.body;
+  const sqlInsert = "INSERT INTO contact(name, email, address) VALUES (?,?,?)"
+  db.query(sqlInsert,[name,email,address],(err,res)=>{
     if(err){
       console.log(err);
     }else{
-      res.send("Data is Insert")
+      console.log(name,email,address);
     }
   });
 })

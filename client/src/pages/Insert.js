@@ -8,16 +8,17 @@ const Insert = () => {
   const loadData = async () => {
     const response = await axios.get("http://localhost:5000/api/get");
     setData(response.data);
-    console.log(response.data);
+    // console.log(response.data);
   };
   useEffect(() => {
     loadData();
-  }, []);
+  }, [data]);
+  
   return (
     <div className="container">
-      <div className="table">
+      <div className="table_area">
         <table>
-          <tr>
+          <tr className="table_header">
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
@@ -37,9 +38,11 @@ const Insert = () => {
       </div>
       <div className="footer_area">
         <div className="input_area">
+        <h4> INSERT DATA :</h4>
           <AddEdit text="ADD"></AddEdit>
         </div>
         <div className="sql_area">
+          <h4>SQL QYERY CODE :</h4>
           <p>
             "INSERT INTO `contact`(`name`, `email`, `contact`) VALUES (?,?,?)"
           </p>
