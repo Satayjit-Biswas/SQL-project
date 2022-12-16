@@ -22,19 +22,18 @@ function AddEdit(props) {
           address,
         })
         .then(() => {
-          setState({ name: "", email: "", address: "" });
-          toast.success("ADD Data");
+          
         })
         .catch((err) => {
           toast.error(err.response.data);
         });
       setState({ name: "", email: "", address: "" });
       toast.success("ADD Data");
-      // setTimeout(() =>{
-      //   history.push("/");
-      // },5000)
     }
   };
+  // useEffect(()=>{
+  //   axios.get(axios.get("http://localhost:5000/api/get");)
+  // },[])
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
