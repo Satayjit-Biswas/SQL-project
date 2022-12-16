@@ -40,6 +40,48 @@ app.post("/api/post",(req,res)=>{
 })
 
 
+// Remove Data in mysql DBMS 
+
+app.delete("/api/remove/:id",(req,res)=>{
+  const {id} = req.params;
+  const sqlRemove = "DELETE FROM contact WHERE id = ?"
+  db.query(sqlRemove,id,(err,res)=>{
+    if(err){
+      console.log(err);
+    }else{
+      console.log("Delete Data");
+    }
+  });
+})
+
+// // Update Data in mysql DBMS 
+
+// app.get("/api/get/:id",(req,res)=>{
+//   const {id} = req.params;
+//   const sqlGet = "SELECT * FROM contact WHERE id = ?"
+//   db.query(sqlGet,id,(err,res)=>{
+//     if(err){
+//       console.log(err);
+//     }else{
+//       console.log("Get Data");
+//     }
+//   });
+// })
+
+// Update Data in mysql DBMS 
+
+app.put("/api/get/:id",(req,res)=>{
+  const {id} = req.params;
+  const {name,email,address} = req.body;
+  const sqlUpdate = "UPDATE contact SET name = ? , email = ? , address = ? WHERE id = ? ";
+  db.query(sqlUpdate,[name,email,address,id],(err,res)=>{
+    if(err){
+      console.log(err);
+    }else{
+      console.log("Get Data");
+    }
+  });
+})
 
 
 app.get("/", (req, res) => {

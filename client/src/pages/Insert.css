@@ -5,7 +5,7 @@ table {
 }
 
 .table_area {
-  margin-top: 150px;
+  margin-top: 120px;
   max-height: 400px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -26,16 +26,11 @@ tr:nth-child(even) {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 50px;
 }
 .input_area {
   width: 50%;
 }
 .input_area h4 {
   text-decoration: underline;
-}
-.sql_area {
-  background-color: rgb(72, 72, 72);
-  color: #fff;
-  padding: 5px 15px 15px 15px;
-  min-height: 60px;
 }

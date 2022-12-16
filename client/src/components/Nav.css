@@ -1,0 +1,28 @@
+.menu_area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(212, 212, 212);
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+.navbar li {
+  list-style: none;
+}
+.navbar li a {
+  padding: 5px 8px;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin: 0 5px;
+  transition: 0.3s;
+}
+.navbar li a:hover {
+  background-color: rgb(146, 146, 146);
+  color: rgb(255, 255, 255);
+}

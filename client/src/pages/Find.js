@@ -4,7 +4,7 @@ import AddEdit from "../components/AddEdit";
 import SqlCode from "../components/SqlCode";
 import "./Insert.css";
 
-const Insert = () => {
+const Find = () => {
   const [data, setData] = useState([]);
   const loadData = async () => {
     const response = await axios.get("http://localhost:5000/api/get");
@@ -48,4 +48,4 @@ const Insert = () => {
   );
 };
 
-export default Insert;
+export default Find;

@@ -1,0 +1,9 @@
+.sql_area {
+  background-color: rgb(72, 72, 72);
+  color: #fff;
+  padding: 5px 15px 15px 15px;
+  min-height: 60px;
+}
+.sql_area p {
+  min-width: 400px;
+}
