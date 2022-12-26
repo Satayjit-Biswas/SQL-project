@@ -13,7 +13,7 @@ const Insert = () => {
   };
   useEffect(() => {
     loadData();
-  }, [setData]);
+  }, [data]);
   
   return (
     <div className="container">

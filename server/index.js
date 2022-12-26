@@ -54,23 +54,20 @@ app.delete("/api/remove/:id",(req,res)=>{
   });
 })
 
-// // Update Data in mysql DBMS 
+// Single Data in mysql DBMS 
 
-// app.get("/api/get/:id",(req,res)=>{
-//   const {id} = req.params;
-//   const sqlGet = "SELECT * FROM contact WHERE id = ?"
-//   db.query(sqlGet,id,(err,res)=>{
-//     if(err){
-//       console.log(err);
-//     }else{
-//       console.log("Get Data");
-//     }
-//   });
-// })
+app.get("/api/get/:id",(req,res)=>{
+  const {id} = req.params;
+  const sqlGet = "SELECT * FROM contact WHERE id = ?"
+  db.query(sqlGet,id,(err,result)=>{
+    res.send(result);
+  });
+})
+
 
 // Update Data in mysql DBMS 
 
-app.put("/api/get/:id",(req,res)=>{
+app.put("/api/update/:id",(req,res)=>{
   const {id} = req.params;
   const {name,email,address} = req.body;
   const sqlUpdate = "UPDATE contact SET name = ? , email = ? , address = ? WHERE id = ? ";
@@ -83,6 +80,15 @@ app.put("/api/get/:id",(req,res)=>{
   });
 })
 
+// Single Data in mysql DBMS 
+
+app.get("/api/find/:text",(req,res)=>{
+  const text = req.params;
+  const sqlGet = `SELECT * FROM contact WHERE name like '%${text.text}%'`
+  db.query(sqlGet,(err,result)=>{
+    res.send(result);
+  });
+})
 
 app.get("/", (req, res) => {
     res.send("Running Server");

@@ -33,4 +33,5 @@ tr:nth-child(even) {
 }
 .input_area h4 {
   text-decoration: underline;
+  text-transform: uppercase;
 }

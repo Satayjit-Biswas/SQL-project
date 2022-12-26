@@ -1,36 +1,54 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "./AddEdit.css";
-const initialState = {
-  name: "",
-  email: "",
-  address: "",
-};
+
 function AddEdit(props) {
-  const [state, setState] = useState(initialState);
+  const singleUserid = props.id;
+  const [state, setState] = useState({});
   const { name, email, address } = state;
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/get/${singleUserid}`)
+      .then((res) => setState({ ...res.data[0] }));
+  }, [singleUserid]);
   const handlesubmit = (e) => {
     e.preventDefault();
     if (!name || !email || !address) {
       toast.error("Please Provide valu into each input field");
     } else {
-      axios
-        .post("http://localhost:5000/api/post", {
-          name,
-          email,
-          address,
-        })
-        .then(() => {
-          
-        })
-        .catch((err) => {
-          toast.error(err.response.data);
-        });
-      setState({ name: "", email: "", address: "" });
-      toast.success("ADD Data");
+      if (!singleUserid) {
+        axios
+          .post("http://localhost:5000/api/post", {
+            name,
+            email,
+            address,
+          })
+          .then(() => {})
+          .catch((err) => {
+            toast.error(err.response.data);
+          });
+        setState({ name: "", email: "", address: "" });
+        toast.success("ADD Data");
+      }
+      else{
+        axios
+          .put(`http://localhost:5000/api/update/${singleUserid}`, {
+            name,
+            email,
+            address,
+          })
+          .then(() => {})
+          .catch((err) => {
+            toast.error(err.response.data);
+          });
+        setState({ name: "", email: "", address: "" });
+        toast.success("Update your User Data...");
+      }
     }
   };
+
+ 
   // useEffect(()=>{
   //   axios.get(axios.get("http://localhost:5000/api/get");)
   // },[])
@@ -48,7 +66,7 @@ function AddEdit(props) {
             type="text"
             name="name"
             id="name"
-            value={name}
+            value={name || ""}
             onChange={handleInputChange}
             placeholder="Your Name"
           />
@@ -57,7 +75,7 @@ function AddEdit(props) {
             type="email"
             name="email"
             id="email"
-            value={email}
+            value={email || ""}
             onChange={handleInputChange}
             placeholder="Your Email"
           />
@@ -66,7 +84,7 @@ function AddEdit(props) {
             type="text"
             name="address"
             id="address"
-            value={address}
+            value={address || ""}
             onChange={handleInputChange}
             placeholder="Your Address"
           ></textarea>

@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
 import AddEdit from "../components/AddEdit";
 import SqlCode from "../components/SqlCode";
 import "./Insert.css";
 
 const Insert = () => {
   const [data, setData] = useState([]);
+  const [singleUser, setsingleUser] = useState({});
   const loadData = async () => {
     const response = await axios.get("http://localhost:5000/api/get");
     setData(response.data);
@@ -13,12 +15,15 @@ const Insert = () => {
   };
   useEffect(() => {
     loadData();
-  }, [setData]);
-  const handleUpdate = () =>{
-    
+  }, [data]);
+ 
+  const handleUpdate = (id) =>{
+    setsingleUser(id);
   }
   return (
     <div className="container">
+        <ToastContainer></ToastContainer>
+
       <div className="table_area">
         <table>
           <tr className="table_header">
@@ -41,7 +46,7 @@ const Insert = () => {
                         handleUpdate(item.id);
                       }}
                     >
-                      Remove
+                      Update
                     </button>
                   </td>
               </tr>
@@ -52,9 +57,9 @@ const Insert = () => {
       <div className="footer_area">
         <div className="input_area">
         <h4> Update DATA :</h4>
-          <AddEdit text="ADD"></AddEdit>
+          <AddEdit id={singleUser}  text="Update" ></AddEdit>
         </div>
-        <SqlCode code={`"INSERT INTO contact(name, email, address) VALUES (?,?,?)"`}></SqlCode>
+        <SqlCode code={`"UPDATE contact SET name = ? , email = ? , address = ? WHERE id = ? "`}></SqlCode>
       </div>
     </div>
   );

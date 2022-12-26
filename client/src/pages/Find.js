@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import AddEdit from "../components/AddEdit";
 import SqlCode from "../components/SqlCode";
 import "./Insert.css";
 
 const Find = () => {
+  const [state, setState] = useState({});
+  const { name } = state;
   const [data, setData] = useState([]);
   const loadData = async () => {
     const response = await axios.get("http://localhost:5000/api/get");
@@ -12,9 +13,22 @@ const Find = () => {
     // console.log(response.data);
   };
   useEffect(() => {
-    loadData();
-  }, [setData]);
+    if(!state.name){
+        loadData();
+    }else{
+      find(state);
+    }
+  }, [data]);
   
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
+  };
+  const find =(text) =>{
+    axios
+      .get(`http://localhost:5000/api/find/${text.name}`)
+      .then((res) => setData(res.data));
+  }
   return (
     <div className="container">
       <div className="table_area">
@@ -39,10 +53,20 @@ const Find = () => {
       </div>
       <div className="footer_area">
         <div className="input_area">
-        <h4> INSERT DATA :</h4>
-          <AddEdit text="ADD"></AddEdit>
+        <h4> SEARCH DATA :</h4>
+        <form>
+          <label>Name:</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value={name}
+            onChange={handleInputChange}
+            placeholder="Your Name"
+          />
+        </form>
         </div>
-        <SqlCode code={`"INSERT INTO contact(name, email, address) VALUES (?,?,?)"`}></SqlCode>
+        <SqlCode code={`"SELECT * FROM contact WHERE name like '% ? %'"`}></SqlCode>
       </div>
     </div>
   );
