@@ -16,18 +16,21 @@ textarea {
   max-height: 80px;
 }
 button {
-  background-color: green;
+  background-color: #222831;
   padding: 8px 16px;
   border: none;
   cursor: pointer;
   transition: 0.3s;
   font-weight: 600;
+  border: 2px solid #222831;
+  color: #fff;
 }
 button:hover {
-  background-color: rgb(0, 77, 0);
   padding: 8px 16px;
+  background-color: #ffff;
   border: none;
-  color: #fff;
+  color: #10a19d;
   cursor: pointer;
   font-weight: 600;
+  border: 2px solid #10a19d;
 }
